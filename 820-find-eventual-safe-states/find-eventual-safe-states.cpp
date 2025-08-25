@@ -1,32 +1,32 @@
 class Solution {
 public:
-
-    bool dfs(vector<vector<int>>& graph, vector<int>& visited, int i) {
-        if(visited[i] == 1) return true;
-        if(visited[i] == -1 || visited[i] == 2) return false;
-
-        visited[i] = 2;
-        for(auto it : graph[i]) {
-            if(!dfs(graph, visited, it)) {
-                visited[i] = -1;
-                return false;
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<vector<int>> adj(graph.size());
+        vector<int> outdegree(graph.size(), 0);
+        for(int i = 0; i < graph.size(); i++) {
+            for(auto it : graph[i]) {
+                adj[it].push_back(i);
+                outdegree[i]++;
             }
         }
-        visited[i] = 1;
-        return true;
-    }
-
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int n = graph.size();
-        vector<int> visited(n, 0);
-
-        for(int i = 0; i < n; i++) {
-            if(visited[i] == 0) dfs(graph, visited, i);
+        queue<int> q;
+        for(int i = 0; i < outdegree.size(); i++) {
+            if(outdegree[i] == 0) q.push(i);
         }
-        vector<int> safe_array;
-        for(int i = 0; i < visited.size(); i++) {
-            if(visited[i] == 1) safe_array.push_back(i);
+        vector<int> safe_node;
+        while(!q.empty()) {
+            int node = q.front(); q.pop();
+            safe_node.push_back(node);
+
+            for(int i = 0; i < adj[node].size(); i++) {
+                int u = adj[node][i];
+                --outdegree[u];
+                 if(outdegree[u] == 0) q.push(u);
+            }
         }
-        return safe_array;
+        sort(safe_node.begin(), safe_node.end());
+        return safe_node;
+        
+
     }
 };
