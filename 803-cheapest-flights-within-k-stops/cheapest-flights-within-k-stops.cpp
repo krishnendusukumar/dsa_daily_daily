@@ -20,7 +20,6 @@ public:
         while(!pq.empty()) {
             auto [stops, node, price] = pq.top(); pq.pop();
             if(node == dst) memo[dst] = min(memo[dst], price);
-            if(stops > k) continue;
             for(auto [u,w] : adj[node]) {
                 if(stops <= k){
                     if(memo[u] > w + price) {
