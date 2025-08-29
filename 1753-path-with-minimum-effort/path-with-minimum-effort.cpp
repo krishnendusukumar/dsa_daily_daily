@@ -9,13 +9,13 @@ const vector<int> dc = {0, -0, -1 ,1};
 
         vector<vector<int>> memo(n, vector<int>(m, INT_MAX));
         using T = pair<int,pair<int,int>>;
-        queue<T> pq;
+        priority_queue<T, vector<T>, greater<T>> pq;
         memo[0][0] = 0;
         pq.push({memo[0][0], {0,0}});
         int ans = INT_MAX;
 
         while(!pq.empty()) {
-            auto pair = pq.front();
+            auto pair = pq.top();
             pq.pop();
             int minHeight = pair.first;
             auto [i, j] = pair.second;
