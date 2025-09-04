@@ -5,7 +5,7 @@ public:
 
     void recurse(int n, vector<int>& divisors, vector<int>& path, int k, int j) {
         if (k == 1) {
-            if (n < divisors[j]) return;  // enforce non-decreasing
+            // if (n < divisors[j]) return;  // enforce non-decreasing
             path.push_back(n);
 
             int mini = INT_MAX, maxi = INT_MIN;
