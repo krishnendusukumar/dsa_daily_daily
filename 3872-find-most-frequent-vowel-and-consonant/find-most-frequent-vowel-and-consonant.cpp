@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxFreqSum(string s) {
-        unordered_map<int,int>m;
+        map<int,int>m;
         int ans = 0, count = 0;
         for(int i = 0; i < s.size(); i++) {
             auto first = s[i];
