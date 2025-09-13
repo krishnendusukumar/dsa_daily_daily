@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxFreqSum(string s) {
-        map<int,int>m;
+        unordered_map<int,int>m;
         for(int i = 0; i < s.size(); i++) {
             m[s[i] - 'a']++;
         }
